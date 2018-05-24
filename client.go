@@ -47,6 +47,9 @@ func (c *Client) Request(method string, url string,
 	}
 
 	fullURL := fmt.Sprintf("%s%s", c.BaseURL, url)
+
+	fmt.Println("GDAX API:", method, "->", fullURL)
+
 	req, err := http.NewRequest(method, fullURL, body)
 	if err != nil {
 		return res, err
