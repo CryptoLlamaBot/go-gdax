@@ -110,13 +110,7 @@ func (c *Client) Headers(method, url, timestamp, data string) (map[string]string
 	h["CB-ACCESS-PASSPHRASE"] = c.Passphrase
 	h["CB-ACCESS-TIMESTAMP"] = timestamp
 
-	message := fmt.Sprintf(
-		"%s%s%s%s",
-		timestamp,
-		method,
-		url,
-		data,
-	)
+	message := fmt.Sprintf("%s%s%s%s", timestamp, method, url, data)
 
 	sig, err := generateSig(message, c.Secret)
 	if err != nil {

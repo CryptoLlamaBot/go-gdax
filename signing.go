@@ -25,17 +25,17 @@ func generateSig(message, secret string) (string, error) {
 }
 
 func (m Message) Sign(secret, key, passphrase string) (SignedMessage, error) {
-
 	method := "GET"
 	url := "/users/self/verify"
 	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-	sig, err := generateSig(fmt.Sprintf("%s%s%s", timestamp, method, url), secret)
+	message := fmt.Sprintf("%s%s%s", timestamp, method, url)
+	sig, err := generateSig(message, secret)
 
 	return SignedMessage{
 		Message:    m,
 		Key:        key,
 		Passphrase: passphrase,
-		Timestamp:  strconv.FormatInt(time.Now().Unix(), 10),
+		Timestamp:  timestamp,
 		Signature:  sig,
 	}, err
 }
